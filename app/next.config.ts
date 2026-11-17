@@ -9,6 +9,13 @@ const nextConfig: NextConfig = {
       // direto para o Supabase Storage com URL assinada, sem passar pela Vercel.
       bodySizeLimit: "2mb",
     },
+    // Mantém no cache do navegador as telas já visitadas por alguns segundos:
+    // voltar para uma aba já aberta fica instantâneo, sem esconder mudanças
+    // feitas por outro usuário além desse intervalo.
+    staleTimes: {
+      dynamic: 0,
+      static: 180,
+    },
   },
 };
 

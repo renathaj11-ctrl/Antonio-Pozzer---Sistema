@@ -19,7 +19,10 @@ export async function middleware(request: NextRequest) {
     },
   });
 
-  const { data: { user } } = await supabase.auth.getUser();
+  // Lê a sessão do cookie (sem ida à rede). A validação de verdade — usuário
+  // ativo e RLS — acontece em requireProfile(), dentro de cada página.
+  const { data: { session } } = await supabase.auth.getSession();
+  const user = session?.user ?? null;
   const path = request.nextUrl.pathname;
   const isPublic = path === "/entrar" || path.startsWith("/api/health");
 

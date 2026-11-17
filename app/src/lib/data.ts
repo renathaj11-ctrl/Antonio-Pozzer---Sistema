@@ -36,21 +36,13 @@ export async function listCases(filters: ListFilters = {}): Promise<CaseOverview
 export async function getCaseBundle(id: string): Promise<CaseBundle | null> {
   const supabase = await createServerSupabase();
 
-  const { data: row, error } = await supabase
-    .from("cases")
-    .select("*, applicant:applicants(*)")
-    .eq("id", id)
-    .maybeSingle();
-
-  if (error) throw new Error(`Falha ao carregar caso: ${error.message}`);
-  if (!row) return null;
-
-  const record = row as unknown as CaseRecord & { applicant: Applicant };
-
+  // Todas as consultas dependem apenas do id: uma única ida ao banco.
   const [
+    rowResult,
     overview, identity, consent, screening, cxr, report, sputum,
     certificates, referrals, treatment, documents, events,
   ] = await Promise.all([
+    supabase.from("cases").select("*, applicant:applicants(*)").eq("id", id).maybeSingle(),
     supabase.from("v_case_overview").select("*").eq("id", id).maybeSingle(),
     supabase.from("identity_checks").select("*").eq("case_id", id).order("stage"),
     supabase.from("consents").select("*").eq("case_id", id).maybeSingle(),
@@ -64,6 +56,11 @@ export async function getCaseBundle(id: string): Promise<CaseBundle | null> {
     supabase.from("case_documents").select("*").eq("case_id", id).order("uploaded_at", { ascending: false }),
     supabase.from("case_events").select("*").eq("case_id", id).order("created_at", { ascending: false }).limit(60),
   ]);
+
+  if (rowResult.error) throw new Error(`Falha ao carregar caso: ${rowResult.error.message}`);
+  if (!rowResult.data) return null;
+
+  const record = rowResult.data as unknown as CaseRecord & { applicant: Applicant };
 
   return {
     detail: record,

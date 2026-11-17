@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
-const ITEMS = [
+const OPERACAO = [
   { href: "/painel", label: "Painel", icon: "▦" },
   { href: "/casos", label: "Casos", icon: "☰" },
   { href: "/casos/novo", label: "Novo caso", icon: "+" },
@@ -11,31 +12,55 @@ const ITEMS = [
 
 export function Nav({ canAudit }: { canAudit: boolean }) {
   const pathname = usePathname();
+  // Menu clicado que ainda não terminou de carregar: destaca na hora.
+  const [pendente, setPendente] = useState<string | null>(null);
 
-  const isActive = (href: string) =>
+  useEffect(() => {
+    setPendente(null);
+  }, [pathname]);
+
+  // Se a navegação falhar (rede, servidor), a barra não fica girando para sempre.
+  useEffect(() => {
+    if (!pendente) return;
+    const t = setTimeout(() => setPendente(null), 8000);
+    return () => clearTimeout(t);
+  }, [pendente]);
+
+  const atual = (href: string) =>
     href === "/casos" ? pathname === "/casos" || /^\/casos\/[^/]+$/.test(pathname) : pathname === href;
 
-  return (
-    <nav className="nav" aria-label="Navegação principal">
-      <span className="nav-label">Operação</span>
-      {ITEMS.map((item) => (
-        <Link key={item.href} href={item.href} data-active={isActive(item.href)}>
-          <span className="nav-icon" aria-hidden="true">{item.icon}</span>
-          {item.label}
-        </Link>
-      ))}
+  const ativo = (href: string) => (pendente ? href === pendente : atual(href));
 
-      <span className="nav-label">Gestão</span>
-      {canAudit && (
-        <Link href="/auditoria" data-active={pathname === "/auditoria"}>
-          <span className="nav-icon" aria-hidden="true">◎</span>
-          Auditoria
-        </Link>
-      )}
-      <Link href="/configuracoes" data-active={pathname === "/configuracoes"}>
-        <span className="nav-icon" aria-hidden="true">⚙</span>
-        Configurações
+  const link = (href: string, icon: string, label: string) => {
+    const marcado = ativo(href);
+    const carregando = pendente === href && !atual(href);
+    return (
+      <Link
+        key={href}
+        href={href}
+        data-active={marcado}
+        aria-current={marcado ? "page" : undefined}
+        aria-busy={carregando || undefined}
+        onClick={() => setPendente(atual(href) ? null : href)}
+      >
+        <span className="nav-icon" aria-hidden="true">{icon}</span>
+        {label}
+        {carregando && <span className="tab-loading" aria-hidden="true" />}
       </Link>
-    </nav>
+    );
+  };
+
+  return (
+    <>
+      {pendente && <span className="nav-progress" aria-hidden="true" />}
+      <nav className="nav" aria-label="Navegação principal">
+        <span className="nav-label">Operação</span>
+        {OPERACAO.map((item) => link(item.href, item.icon, item.label))}
+
+        <span className="nav-label">Gestão</span>
+        {canAudit && link("/auditoria", "◎", "Auditoria")}
+        {link("/configuracoes", "⚙", "Configurações")}
+      </nav>
+    </>
   );
 }

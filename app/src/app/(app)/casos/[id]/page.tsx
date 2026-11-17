@@ -17,6 +17,7 @@ import { EscarroTab } from "@/components/case/escarro";
 import { DesfechoTab } from "@/components/case/desfecho";
 import { DocumentosTab } from "@/components/case/documentos";
 import { HistoricoTab } from "@/components/case/historico";
+import { TabNav } from "@/components/case/tab-nav";
 
 const TABS = [
   { key: "resumo", label: "Resumo" },
@@ -36,6 +37,17 @@ function first(value: string | string[] | undefined): string {
   return value ?? "";
 }
 
+async function listarMedicos(): Promise<Array<{ id: string; full_name: string }>> {
+  const supabase = await createServerSupabase();
+  const { data } = await supabase
+    .from("profiles")
+    .select("id, full_name, role")
+    .eq("active", true)
+    .in("role", ["medico", "admin"])
+    .order("full_name");
+  return (data ?? []) as Array<{ id: string; full_name: string }>;
+}
+
 export default async function CasoPage({
   params,
   searchParams,
@@ -47,7 +59,13 @@ export default async function CasoPage({
   const { id } = await params;
   const sp = await searchParams;
 
-  const bundle = await getCaseBundle(id);
+  const canClinical = canWrite(profile.role, "clinical");
+
+  // Busca o caso e a lista de médicos ao mesmo tempo (uma única espera).
+  const [bundle, medicos] = await Promise.all([
+    getCaseBundle(id),
+    canClinical ? listarMedicos() : Promise.resolve([]),
+  ]);
   if (!bundle) notFound();
 
   const tab = first(sp.tab) || "resumo";
@@ -61,22 +79,11 @@ export default async function CasoPage({
   const doneRequired = required.filter((item) => item.done).length;
   const next = overview ? nextAction(overview) : null;
 
-  const canClinical = canWrite(profile.role, "clinical");
   const canRadiology = canWrite(profile.role, "radiology");
   const canCertificate = canWrite(profile.role, "certificate");
   const canUpload = canClinical || canRadiology;
 
-  let physicians: Array<{ id: string; full_name: string }> = [];
-  if (canClinical) {
-    const supabase = await createServerSupabase();
-    const { data } = await supabase
-      .from("profiles")
-      .select("id, full_name, role")
-      .eq("active", true)
-      .in("role", ["medico", "admin"])
-      .order("full_name");
-    physicians = (data ?? []) as Array<{ id: string; full_name: string }>;
-  }
+  const physicians = medicos;
 
   const dots: Record<string, Tone | undefined> = overview
     ? {
@@ -134,17 +141,7 @@ export default async function CasoPage({
         {ok && <Alert tone="ok">{ok}</Alert>}
         {erro && <Alert tone="danger">{erro}</Alert>}
 
-        <nav className="tabs" aria-label="Seções do caso">
-          {TABS.map((item) => {
-            const tone = dots[item.key];
-            return (
-              <Link key={item.key} href={`/casos/${bundle.detail.id}?tab=${item.key}`} data-active={tab === item.key}>
-                <span className="tab-dot" data-tone={tone ?? "none"} />
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
+        <TabNav caseId={bundle.detail.id} items={TABS} active={tab} dots={dots} />
 
         {tab === "resumo" && (
           <ResumoTab bundle={bundle} canEdit={canClinical} physicians={physicians} />
