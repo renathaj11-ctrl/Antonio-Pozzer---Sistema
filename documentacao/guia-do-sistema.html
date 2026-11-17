@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Guia do Sistema — Triagem de TB para Vistos do Reino Unido</title>
+<style>
+  :root {
+    --navy: #0f3f77;
+    --navy-deep: #071b38;
+    --blue: #1b66a8;
+    --blue-soft: #e8f2fc;
+    --line: #d6e2ef;
+    --ink: #1e2a38;
+    --muted: #5b6b7d;
+  }
+
+  @page {
+    size: A4;
+    margin: 18mm 16mm 20mm;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  body {
+    margin: 0;
+    font-family: "Segoe UI", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-size: 10.4pt;
+    line-height: 1.55;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  h1, h2, h3, h4 { color: var(--navy); line-height: 1.25; margin: 0; }
+  h2, h3, h4 { page-break-after: avoid; }
+
+  h2 {
+    font-size: 15pt;
+    margin: 0 0 4mm;
+    padding-bottom: 2.5mm;
+    border-bottom: 2px solid var(--blue-soft);
+  }
+
+  h3 { font-size: 11.6pt; margin: 6mm 0 2mm; }
+
+  h4 { font-size: 10.4pt; margin: 4mm 0 1.5mm; color: var(--blue); }
+
+  p { margin: 0 0 3mm; }
+
+  ul, ol { margin: 0 0 3mm; padding-left: 5.5mm; }
+
+  li { margin-bottom: 1.2mm; }
+
+  strong { color: #12263d; }
+
+  code {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 9pt;
+    background: #f2f6fb;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 0.5mm 1.2mm;
+  }
+
+  section { page-break-before: auto; margin-top: 9mm; }
+  section.first { page-break-before: auto; margin-top: 0; }
+  section.brk { page-break-before: always; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 4mm;
+    font-size: 9.6pt;
+    page-break-inside: avoid;
+  }
+
+  th {
+    text-align: left;
+    background: var(--navy);
+    color: #fff;
+    font-weight: 600;
+    padding: 2mm 2.5mm;
+    border: 1px solid var(--navy);
+  }
+
+  td {
+    padding: 2mm 2.5mm;
+    border: 1px solid var(--line);
+    vertical-align: top;
+  }
+
+  tbody tr:nth-child(even) td { background: #f7fafe; }
+
+  .note {
+    background: var(--blue-soft);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+    padding: 3mm 4mm;
+    margin: 0 0 4mm;
+    page-break-inside: avoid;
+  }
+
+  .note strong { color: var(--navy); }
+
+  .warn {
+    background: #fff8e8;
+    border-left: 3px solid #d99a1b;
+    border-radius: 0 6px 6px 0;
+    padding: 3mm 4mm;
+    margin: 0 0 4mm;
+    page-break-inside: avoid;
+  }
+
+  .grid { display: flex; gap: 4mm; flex-wrap: wrap; }
+  .grid > div { flex: 1 1 45%; }
+
+  /* ---------- capa ---------- */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 250mm;
+    page-break-after: always;
+  }
+
+  .cover-top { padding-top: 8mm; }
+
+  .cover-logo { width: 52mm; height: auto; margin-bottom: 16mm; }
+
+  .cover .eyebrow {
+    font-size: 9pt;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 700;
+    margin-bottom: 3mm;
+  }
+
+  .cover h1 {
+    font-size: 30pt;
+    letter-spacing: -0.01em;
+    margin-bottom: 4mm;
+  }
+
+  .cover .lead {
+    font-size: 12.5pt;
+    color: var(--muted);
+    max-width: 120mm;
+    line-height: 1.5;
+  }
+
+  .cover-rule {
+    height: 3px;
+    width: 42mm;
+    background: linear-gradient(90deg, var(--navy), #8ec7f7);
+    margin: 8mm 0;
+  }
+
+  .cover-meta {
+    border-top: 1px solid var(--line);
+    padding-top: 5mm;
+    font-size: 9.6pt;
+    color: var(--muted);
+  }
+
+  .cover-meta strong { display: block; color: var(--ink); font-size: 10.4pt; }
+
+  .cover-meta .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6mm 12mm;
+  }
+  .cover-meta .cols > div:last-child { grid-column: 1 / -1; }
+
+  /* ---------- sumário ---------- */
+  .toc ol { list-style: none; padding-left: 0; counter-reset: toc; }
+  .toc li {
+    counter-increment: toc;
+    display: flex;
+    gap: 3mm;
+    padding: 1.8mm 0;
+    border-bottom: 1px dotted var(--line);
+    font-size: 10.4pt;
+  }
+  .toc li::before {
+    content: counter(toc);
+    color: var(--blue);
+    font-weight: 700;
+    min-width: 6mm;
+  }
+
+  .step {
+    display: flex;
+    gap: 3mm;
+    margin-bottom: 3mm;
+    page-break-inside: avoid;
+  }
+  .step-num {
+    flex: none;
+    width: 7mm;
+    height: 7mm;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    font-size: 9pt;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.6mm;
+  }
+  .step-body { flex: 1; }
+  .step-body strong { display: block; margin-bottom: 0.5mm; }
+
+  .kicker { font-size: 9pt; color: var(--muted); margin-bottom: 3mm; }
+
+  .footer {
+    margin-top: 8mm;
+    padding-top: 3mm;
+    border-top: 1px solid var(--line);
+    font-size: 8.6pt;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================ CAPA ============================ -->
+<div class="cover">
+  <div class="cover-top">
+    <img class="cover-logo" src="../app/public/marca/logo-antonio-pozzer.png" alt="Antonio Pozzer — Consultório Médico para Imigração" />
+
+    <p class="eyebrow">Guia de uso e funcionamento</p>
+    <h1>Sistema de Triagem<br />de Tuberculose</h1>
+    <div class="cover-rule"></div>
+    <p class="lead">
+      Prontuário eletrônico e controle de prazos para a triagem de tuberculose
+      exigida pelo Reino Unido (UK Pre-entry TB Screening), do primeiro
+      atendimento até a emissão do certificado ou o encaminhamento para tratamento.
+    </p>
+  </div>
+
+  <div class="cover-meta">
+    <div class="cols">
+      <div>
+        <strong>Clínica</strong>
+        Antonio Pozzer · Consultório Médico para Imigração<br />
+        Porto Alegre · Rio Grande do Sul · Brasil
+      </div>
+      <div>
+        <strong>Documento</strong>
+        Versão 1.0 · Novembro de 2026<br />
+        Destinado ao Dr. Antonio Pozzer
+      </div>
+      <div>
+        <strong>Desenvolvimento</strong>
+        Criado e desenvolvido por Felipe Schneider
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ SUMÁRIO ============================ -->
+<section class="first toc">
+  <h2>Sumário</h2>
+  <ol>
+    <li>O que é o sistema e o que ele resolve</li>
+    <li>Acesso e perfis de usuário</li>
+    <li>Visão geral das telas</li>
+    <li>O caminho de um caso, passo a passo</li>
+    <li>As abas do caso em detalhe</li>
+    <li>Regras e prazos que o sistema controla sozinho</li>
+    <li>Situações (status) de um caso</li>
+    <li>Indicadores do Painel</li>
+    <li>Uso no celular e no tablet</li>
+    <li>Segurança, privacidade e LGPD</li>
+    <li>Perguntas frequentes e solução de problemas</li>
+    <li>Rotina recomendada e observações finais</li>
+  </ol>
+
+  <div class="note" style="margin-top:8mm">
+    <strong>Como ler este guia.</strong> As seções 4 e 5 descrevem o uso diário —
+    são as que interessam para a rotina da clínica. As seções 6 a 10 explicam as
+    regras que o sistema aplica automaticamente e os cuidados de segurança da
+    informação. A seção 11 responde às dúvidas mais comuns no atendimento.
+  </div>
+</section>
+
+<!-- ============================ 1 ============================ -->
+<section>
+  <h2>1. O que é o sistema e o que ele resolve</h2>
+
+  <p>
+    O sistema é o prontuário eletrônico da triagem de tuberculose para vistos
+    do Reino Unido. Cada pessoa atendida na clínica gera um <strong>caso</strong>,
+    identificado por um número próprio, que reúne toda a documentação e o
+    histórico clínico daquele processo.
+  </p>
+
+  <p>
+    Antes, o controle era feito em papel e planilhas: prazos do escarro
+    anotados à mão, laudo aguardando revisão sem aviso, certificado emitido sem
+    alguma etapa obrigatória. O sistema existe para eliminar esse tipo de falha.
+  </p>
+
+  <h3>O que o sistema faz</h3>
+  <ul>
+    <li><strong>Guia o fluxo completo</strong> — do cadastro do requerente ao certificado ou ao encaminhamento para tratamento, indicando sempre qual é a próxima ação.</li>
+    <li><strong>Controla prazos</strong> — calcula sozinho a validade do certificado, o prazo de início do escarro e o vencimento da re-triagem.</li>
+    <li><strong>Impede certificado irregular</strong> — o certificado só pode ser emitido quando todas as etapas obrigatórias estão concluídas e o laudo foi revisado pelo Panel Physician.</li>
+    <li><strong>Guarda documentos</strong> — radiografias em DICOM, laudos, consentimento assinado e demais arquivos ficam vinculados ao caso.</li>
+    <li><strong>Registra quem fez o quê</strong> — toda alteração fica gravada com autor, data e hora, em trilha de auditoria.</li>
+    <li><strong>Funciona no computador, no tablet e no celular</strong>, inclusive instalado como aplicativo.</li>
+  </ul>
+
+  <h3>Princípios de funcionamento</h3>
+  <table>
+    <tr><th style="width:38%">Princípio</th><th>Como aparece na prática</th></tr>
+    <tr><td>Um caso, um número</td><td>Todo caso recebe um número no formato <code>UKTB-AAAA-NNNN</code>, gerado automaticamente, que nunca se repete.</td></tr>
+    <tr><td>Etapas obrigatórias</td><td>O sistema acompanha 8 etapas; as obrigatórias precisam estar concluídas antes do certificado.</td></tr>
+    <tr><td>Regra no banco, não só na tela</td><td>As travas do certificado são verificadas também no banco de dados. Não há como contornar pela interface.</td></tr>
+    <tr><td>Nada é apagado</td><td>Não existe exclusão de caso pela aplicação; correções são registradas como retificação.</td></tr>
+    <tr><td>Rastro completo</td><td>Cada salvamento gera um registro de auditoria e um evento na linha do tempo do caso.</td></tr>
+  </table>
+</section>
+
+<!-- ============================ 2 ============================ -->
+<section>
+  <h2>2. Acesso e perfis de usuário</h2>
+
+  <h3>Como entrar</h3>
+  <ol>
+    <li>Abra o navegador e acesse <strong>antoniopozzer.vercel.app</strong>.</li>
+    <li>Informe o <strong>e-mail</strong> e a <strong>senha</strong> cadastrados para você.</li>
+    <li>Clique em <strong>Entrar no sistema</strong>.</li>
+  </ol>
+
+  <p class="kicker">
+    Não existe autocadastro. Os usuários são criados pelo administrador, que
+    define o e-mail, a senha inicial e o papel de cada pessoa. Se a senha for
+    esquecida, o administrador redefine o acesso.
+  </p>
+
+  <div class="note">
+    <strong>Sessão.</strong> O acesso é individual e nominal. Ao terminar o
+    atendimento em um computador compartilhado, use <strong>Sair</strong>, no
+    rodapé do menu lateral, para encerrar a sessão.
+  </div>
+
+  <h3>Perfis e permissões</h3>
+  <p>
+    Cada usuário tem um papel. O sistema mostra apenas o que aquele papel pode
+    fazer, e o banco de dados aplica a mesma restrição.
+  </p>
+
+  <table>
+    <tr>
+      <th style="width:24%">Papel</th>
+      <th>O que pode fazer</th>
+    </tr>
+    <tr>
+      <td><strong>Administrador</strong></td>
+      <td>Acesso completo: cadastro, clínica, radiografia, laudo, revisão, certificado, encaminhamento, documentos e auditoria.</td>
+    </tr>
+    <tr>
+      <td><strong>Panel Physician</strong><br /><span class="kicker">(médico)</span></td>
+      <td>Tudo do fluxo clínico, incluindo a <strong>revisão do laudo</strong> e a <strong>emissão do certificado</strong>.</td>
+    </tr>
+    <tr>
+      <td><strong>Radiologista</strong></td>
+      <td>Registra a radiografia e redige o laudo. Não revisa o laudo como Panel Physician nem emite certificado.</td>
+    </tr>
+    <tr>
+      <td><strong>Secretaria</strong></td>
+      <td>Cadastro do requerente, verificação de identidade, consentimento, triagem, escarro e documentos. Não assina laudo nem certificado.</td>
+    </tr>
+    <tr>
+      <td><strong>Enfermagem</strong></td>
+      <td>Triagem, radiografia, escarro, identidade, consentimento e documentos.</td>
+    </tr>
+    <tr>
+      <td><strong>Auditor</strong></td>
+      <td>Somente leitura, com acesso à trilha de auditoria. Não altera nenhum registro.</td>
+    </tr>
+  </table>
+
+  <div class="warn">
+    <strong>Importante.</strong> O papel de cada usuário é definido no momento do
+    cadastro. Se alguém precisar assumir outra função, o papel deve ser alterado
+    pelo administrador — não se compartilha login entre pessoas.
+  </div>
+</section>
+
+<!-- ============================ 3 ============================ -->
+<section>
+  <h2>3. Visão geral das telas</h2>
+
+  <p>
+    O menu lateral esquerdo é o mapa do sistema. Ele tem dois blocos:
+    <strong>Operação</strong> (Painel, Casos, Novo caso) e
+    <strong>Gestão</strong> (Auditoria, Configurações).
+  </p>
+
+  <table>
+    <tr><th style="width:24%">Tela</th><th>Para que serve</th></tr>
+    <tr>
+      <td><strong>Painel</strong></td>
+      <td>Retrato do dia: quantos casos ativos, quantos aguardam laudo, quais escarros estão no prazo crítico e quantos certificados foram emitidos no mês. Traz a lista <em>Precisam de atenção</em> e o andamento do caso em foco.</td>
+    </tr>
+    <tr>
+      <td><strong>Casos</strong></td>
+      <td>Lista completa, com busca por nome, número do caso ou passaporte, filtro por situação e por ano. Mostra a próxima ação e quantas pendências cada caso tem.</td>
+    </tr>
+    <tr>
+      <td><strong>Novo caso</strong></td>
+      <td>Abertura de um caso: identificação, contato e vínculo com a clínica. É aqui que o número do caso é gerado.</td>
+    </tr>
+    <tr>
+      <td><strong>Caso</strong></td>
+      <td>A ficha do requerente, organizada em 10 abas (Resumo, Identidade, Consentimento, Triagem, Radiografia, Laudo, Escarro, Desfecho, Documentos, Histórico).</td>
+    </tr>
+    <tr>
+      <td><strong>Auditoria</strong></td>
+      <td>Trilha de todas as alterações em dados clínicos: quem alterou, o quê, quando e em qual registro.</td>
+    </tr>
+    <tr>
+      <td><strong>Configurações</strong></td>
+      <td>Equipe, clínicas habilitadas, regras versionadas, prazos, informações de segurança e o cartão para instalar o aplicativo.</td>
+    </tr>
+  </table>
+
+  <h3>No topo da ficha do caso</h3>
+  <ul>
+    <li><strong>Situação</strong> — etiqueta colorida com o status atual do caso.</li>
+    <li><strong>Próxima ação</strong> — botão que leva direto à aba onde há algo a fazer (por exemplo, "Revisar laudo").</li>
+    <li><strong>Dados do requerente</strong> — idade, data de nascimento, passaporte mascarado e data de abertura.</li>
+    <li><strong>Progresso</strong> — barra com o andamento das etapas obrigatórias (concluídas sobre o total).</li>
+  </ul>
+
+  <div class="note">
+    <strong>Dica de uso diário.</strong> Comece o dia pelo <strong>Painel</strong>.
+    A caixa <em>Precisam de atenção</em> mostra exatamente os casos que exigem
+    decisão hoje: prazo de escarro vencido, escarro positivo e radiografia sem
+    laudo.
+  </div>
+</section>
+
+<!-- ============================ 4 ============================ -->
+<section>
+  <h2>4. O caminho de um caso, passo a passo</h2>
+
+  <p>
+    A ordem abaixo é a mesma do fluxo da matriz das <em>UK Technical
+    Instructions</em>. Em cada etapa, o sistema só libera a seguinte quando a
+    anterior está registrada.
+  </p>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <strong>Abrir o caso</strong>
+      Em <strong>Novo caso</strong>, preencha a identificação conforme o passaporte
+      (nome completo, data de nascimento, número e país do passaporte), o contato
+      e a clínica. O número <code>UKTB-AAAA-NNNN</code> é gerado ao salvar.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <strong>Verificar a identidade</strong>
+      Na aba <strong>Identidade</strong>, confirme o documento nos cinco estágios:
+      registro/recepção, exame médico, radiografia, coleta de escarro e
+      certificado. O UKVI exige conferência antes de cada procedimento.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <strong>Colher o consentimento</strong>
+      Na aba <strong>Consentimento</strong>, registre a data da assinatura, a
+      versão do formulário, o idioma e quem explicou. Marque a caixa de
+      consentimento assinado e anexe a via digitalizada em <strong>Documentos</strong>.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <strong>Fazer a triagem clínica</strong>
+      Na aba <strong>Triagem</strong>, registre sintomas, história prévia de TB,
+      contato com TB, exame físico e a decisão sobre indicar a radiografia. Para
+      gestantes, registre a conduta; para crianças menores de 11 anos, o sistema
+      mostra as regras próprias.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-body">
+      <strong>Registrar a radiografia</strong>
+      Na aba <strong>Radiografia</strong>, informe a data da CXR, a qualidade da
+      imagem, o equipamento e as incidências. A data da CXR é a base de todos os
+      prazos seguintes.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">6</div>
+    <div class="step-body">
+      <strong>Lançar o laudo radiológico</strong>
+      Na aba <strong>Laudo</strong>, o radiologista descreve o exame, marca os
+      achados codificados e classifica o resultado: normal, achado não-TB ou
+      compatível com TB ativa ou antiga. Essa classificação define se haverá escarro.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">7</div>
+    <div class="step-body">
+      <strong>Revisar como Panel Physician</strong>
+      Ainda na aba <strong>Laudo</strong>, o Panel Physician registra a revisão e
+      a aceitação do laudo. Sem essa revisão, o certificado fica bloqueado.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">8</div>
+    <div class="step-body">
+      <strong>Coletar escarro, quando indicado</strong>
+      Se a CXR for compatível com TB ativa ou antiga — ou se houver decisão
+      clínica —, a aba <strong>Escarro</strong> passa a ser obrigatória: três
+      amostras com intervalo mínimo de 24 horas, início em até 7 dias da CXR e
+      laudo final registrado.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">9</div>
+    <div class="step-body">
+      <strong>Concluir o desfecho</strong>
+      Na aba <strong>Desfecho</strong>, emita o <strong>certificado</strong> (com
+      validade calculada a partir da CXR), registre a <strong>não emissão</strong>
+      com o motivo, ou faça o <strong>encaminhamento</strong> para tratamento com
+      as notificações exigidas.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">10</div>
+    <div class="step-body">
+      <strong>Anexar documentos e encerrar</strong>
+      Reúna em <strong>Documentos</strong> a radiografia em DICOM, o laudo, o
+      consentimento e os comprovantes. A aba <strong>Histórico</strong> registra
+      tudo o que aconteceu no caso, com data e autor.
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Em qualquer momento</strong>, o botão <strong>Próxima ação</strong>, no
+    topo da ficha, indica o que falta. É a forma mais rápida de retomar um caso
+    parado.
+  </div>
+</section>
+
+<!-- ============================ 5 ============================ -->
+<section class="brk">
+  <h2>5. As abas do caso em detalhe</h2>
+
+  <h3>Resumo</h3>
+  <p>
+    Reúne os dados do requerente e do processo: identificação, contato,
+    categoria (adulto, gestante ou criança menor de 11 anos), clínica, datas e
+    médico responsável. É a aba para corrigir cadastros e atualizar telefone ou
+    endereço.
+  </p>
+
+  <h3>Identidade</h3>
+  <p>
+    Registra o tipo de documento conferido, o número e os estágios em que a
+    conferência foi feita. Cada estágio marcado fica datado e assinado pelo
+    usuário que registrou. A verificação de identidade é pré-requisito do
+    certificado.
+  </p>
+
+  <h3>Consentimento</h3>
+  <p>
+    Guarda a prova do consentimento informado: data da assinatura, versão do
+    formulário, idioma, quem explicou e se houve intérprete. Também permite
+    registrar a conduta para gestantes e a eventual retirada do consentimento,
+    com data e motivo. A via assinada deve ser anexada em Documentos.
+  </p>
+
+  <h3>Triagem clínica</h3>
+  <p>
+    É o registro clínico de entrada: sintomas (tosse, hemoptise, perda de peso,
+    sudorese noturna, febre), história prévia de TB, contato com TB, contato
+    domiciliar, exame físico, gestação e a decisão sobre indicar a radiografia.
+    Quando a CXR não é indicada, o sistema exige a justificativa clínica.
+  </p>
+
+  <h3>Radiografia</h3>
+  <p>
+    Dados da imagem: data da realização, qualidade (adequada ou subótima com
+    motivo), instalação, operador e incidências. O sistema mostra os prazos que
+    passam a correr a partir da CXR e a validade do futuro certificado.
+  </p>
+
+  <h3>Laudo</h3>
+  <p>
+    Duas partes no mesmo lugar: a descrição do radiologista (com achados
+    codificados da matriz UKVI e comparação com exames anteriores) e a revisão
+    do Panel Physician. A classificação do resultado — <em>normal</em>,
+    <em>achado não-TB</em> ou <em>compatível com TB ativa ou antiga</em> —
+    define a necessidade de escarro e o desfecho possível.
+  </p>
+
+  <h3>Escarro</h3>
+  <p>
+    Indicado automaticamente quando a CXR é compatível com TB ativa ou antiga, ou
+    por decisão clínica registrada. Controla as três coletas, o laboratório, a
+    baciloscopia, a cultura, o teste de sensibilidade, o laudo final e as datas de
+    notificação. <strong>Escarro positivo impede o certificado</strong> e conduz
+    ao encaminhamento para tratamento.
+  </p>
+
+  <h3>Desfecho</h3>
+  <p>
+    Três caminhos possíveis, todos registrados com autor e data:
+  </p>
+  <ul>
+    <li><strong>Certificado de triagem</strong> — número, data de emissão e validade calculada a partir da CXR. Documento imutável: corrige-se por retificação formal, não por edição.</li>
+    <li><strong>Não emissão</strong> — com motivo (TB confirmada ou suspeita, teste adiado, desistência, entre outros).</li>
+    <li><strong>Encaminhamento para tratamento</strong> — com o serviço de destino, as notificações (autoridade local e UKHSA) e o acompanhamento do tratamento, incluindo re-triagem ao final.</li>
+  </ul>
+
+  <h3>Documentos</h3>
+  <p>
+    Anexos do caso: PDF, JPG, PNG e DICOM, até 50 MB por arquivo. Cada envio
+    guarda o nome, o tamanho, a data, o autor e o <strong>hash SHA-256</strong>
+    do arquivo, o que permite provar que o conteúdo não foi alterado.
+    Os arquivos vão direto para um repositório privado, com link temporário de
+    acesso.
+  </p>
+
+  <h3>Histórico</h3>
+  <p>
+    Linha do tempo do caso, gerada automaticamente: abertura, consentimento,
+    triagem, radiação, laudo, escarro, certificado, encaminhamento. Serve como
+    narrativa do atendimento e como apoio em caso de questionamento posterior.
+  </p>
+</section>
+
+<!-- ============================ 6 ============================ -->
+<section>
+  <h2>6. Regras e prazos que o sistema controla sozinho</h2>
+
+  <p>
+    Os prazos abaixo são aplicados pelo próprio sistema, a partir da data da
+    radiografia (CXR) ou da abertura do caso.
+  </p>
+
+  <table>
+    <tr><th style="width:44%">Item</th><th>Regra aplicada</th></tr>
+    <tr><td>Validade do certificado</td><td><strong>6 meses</strong> a partir da data da CXR</td></tr>
+    <tr><td>Contato familiar negativo</td><td><strong>3 meses</strong> (regra UKTBTI v7)</td></tr>
+    <tr><td>Início do escarro</td><td>até <strong>7 dias</strong> após a CXR</td></tr>
+    <tr><td>Amostras de escarro</td><td><strong>3 coletas</strong>, intervalo mínimo de 24 horas</td></tr>
+    <tr><td>Laudo radiológico</td><td>em até <strong>1 dia útil</strong> após a CXR</td></tr>
+    <tr><td>Resultado final do escarro</td><td>em até <strong>10 semanas</strong></td></tr>
+    <tr><td>Re-triagem após tratamento</td><td><strong>6 meses ou mais</strong> após o término</td></tr>
+    <tr><td>Retenção do prontuário</td><td><strong>20 anos</strong> do último registro (CFM 1.821/2007)</td></tr>
+    <tr><td>Numeração do caso</td><td><code>UKTB-AAAA-NNNN</code>, sequencial por ano</td></tr>
+  </table>
+
+  <h3>O que bloqueia a emissão do certificado</h3>
+  <p>
+    Antes de gravar um certificado, o sistema confere as condições abaixo. Se
+    alguma falhar, a emissão é recusada com a mensagem correspondente e um link
+    para a aba onde o problema deve ser resolvido.
+  </p>
+
+  <table>
+    <tr><th style="width:56%">Condição verificada</th><th>Mensagem ao usuário</th></tr>
+    <tr><td>Consentimento informado assinado</td><td>Certificado bloqueado: consentimento não assinado.</td></tr>
+    <tr><td>Ao menos uma verificação de identidade</td><td>Certificado bloqueado: nenhuma verificação registrada.</td></tr>
+    <tr><td>Radiografia vigente registrada</td><td>Certificado bloqueado: não há radiografia vigente.</td></tr>
+    <tr><td>Laudo revisado pelo Panel Physician</td><td>Certificado bloqueado: laudo não revisado.</td></tr>
+    <tr><td>Laudo com resultado classificado</td><td>Certificado bloqueado: laudo sem classificação.</td></tr>
+    <tr><td>Escarro negativo, quando indicado</td><td>Certificado bloqueado: escarro sem laudo final negativo.</td></tr>
+    <tr><td>Escarro positivo</td><td>Certificado bloqueado: exame positivo — encaminhar.</td></tr>
+  </table>
+
+  <div class="warn">
+    <strong>Validação em duas camadas.</strong> A mesma verificação que aparece na
+    tela é executada no banco de dados. Isso significa que nenhuma emissão
+    irregular passa, mesmo em caso de falha da interface ou uso indevido do
+    acesso.
+  </div>
+</section>
+
+<!-- ============================ 7 ============================ -->
+<section>
+  <h2>7. Situações (status) de um caso</h2>
+
+  <p>
+    O status é atualizado automaticamente conforme as etapas são registradas.
+    Ele aparece no topo da ficha, na lista de casos e no Painel.
+  </p>
+
+  <table>
+    <tr><th style="width:34%">Status</th><th>Significado</th></tr>
+    <tr><td>Rascunho</td><td>Caso aberto, ainda sem dados clínicos.</td></tr>
+    <tr><td>Em triagem</td><td>Triagem clínica em andamento.</td></tr>
+    <tr><td>Aguardando CXR</td><td>Radiografia indicada, ainda não realizada.</td></tr>
+    <tr><td>Aguardando laudo</td><td>CXR feita, laudo radiológico pendente.</td></tr>
+    <tr><td>Aguardando escarro</td><td>Escarro indicado, coletas ou resultado pendentes.</td></tr>
+    <tr><td>Aguardando resultado</td><td>Material enviado ao laboratório.</td></tr>
+    <tr><td>Apto a certificado</td><td>Todas as etapas obrigatórias concluídas.</td></tr>
+    <tr><td>Certificado emitido</td><td>Desfecho favorável registrado.</td></tr>
+    <tr><td>Encaminhado</td><td>TB confirmada ou suspeita — encaminhado para tratamento.</td></tr>
+    <tr><td>Em tratamento</td><td>Acompanhamento do tratamento em curso.</td></tr>
+    <tr><td>Encerrado</td><td>Caso concluído.</td></tr>
+    <tr><td>Cancelado</td><td>Desistência ou encerramento administrativo.</td></tr>
+  </table>
+</section>
+
+<!-- ============================ 8 ============================ -->
+<section>
+  <h2>8. Indicadores do Painel</h2>
+
+  <table>
+    <tr><th style="width:34%">Indicador</th><th>O que conta</th></tr>
+    <tr><td>Casos ativos</td><td>Casos que não estão encerrados, cancelados ou com certificado já emitido.</td></tr>
+    <tr><td>Aguardando laudo</td><td>Radiografias realizadas sem laudo registrado.</td></tr>
+    <tr><td>Escarro no prazo crítico</td><td>Coletas que vencem em até 7 dias — contadas a partir da CXR.</td></tr>
+    <tr><td>Certificados no mês</td><td>Certificados emitidos no mês corrente, com o total de encaminhamentos ao lado.</td></tr>
+  </table>
+
+  <p>
+    Abaixo dos indicadores, a lista <strong>Precisam de atenção</strong> traz os
+    casos com prazo vencido, escarro positivo ou CXR sem laudo, sempre com um
+    botão para abrir diretamente a aba onde está o problema.
+  </p>
+
+  <div class="note">
+    <strong>Leitura recomendada.</strong> Se o indicador <em>Escarro no prazo
+    crítico</em> estiver acima de zero no início do dia, essas coletas têm
+    prioridade sobre qualquer outra atividade administrativa.
+  </div>
+</section>
+
+<!-- ============================ 9 ============================ -->
+<section>
+  <h2>9. Uso no celular e no tablet</h2>
+
+  <p>
+    O sistema é um aplicativo web instalável: funciona no navegador e pode ser
+    adicionado à tela inicial do celular, com ícone próprio e abertura em tela
+    cheia, sem a barra de endereço.
+  </p>
+
+  <h3>Como instalar</h3>
+  <div class="grid">
+    <div>
+      <h4>iPhone e iPad (Safari)</h4>
+      <ol>
+        <li>Abra o site no Safari.</li>
+        <li>Toque em <strong>Compartilhar</strong>.</li>
+        <li>Escolha <strong>Adicionar à Tela de Início</strong>.</li>
+      </ol>
+    </div>
+    <div>
+      <h4>Android (Chrome)</h4>
+      <ol>
+        <li>Abra o site no Chrome.</li>
+        <li>Toque no menu de três pontos.</li>
+        <li>Escolha <strong>Instalar aplicativo</strong>.</li>
+      </ol>
+    </div>
+  </div>
+
+  <p>
+    No computador, o próprio Chrome ou Edge oferece o ícone de instalação na
+    barra de endereço. Há também um botão <strong>Instalar aplicativo</strong> em
+    <strong>Configurações → Aplicativo (PWA)</strong>.
+  </p>
+
+  <h3>O que funciona sem internet</h3>
+  <p>
+    O aplicativo guarda no aparelho apenas os arquivos da interface. Se a conexão
+    cair, ele mostra uma tela de aviso e retorna normalmente quando a internet
+    volta. <strong>Nenhum dado de paciente é gravado no celular</strong> — toda
+    informação clínica é lida do servidor no momento do acesso.
+  </p>
+
+  <div class="warn">
+    <strong>Cuidado com aparelhos compartilhados.</strong> Como o acesso é por
+    login, sempre use <strong>Sair</strong> ao terminar em um celular ou tablet
+    que não seja de uso pessoal.
+  </div>
+</section>
+
+<!-- ============================ 10 ============================ -->
+<section class="brk">
+  <h2>10. Segurança, privacidade e LGPD</h2>
+
+  <p>
+    O sistema trata dados pessoais sensíveis de saúde. As decisões de projeto
+    abaixo foram tomadas para atender simultaneamente à LGPD, às resoluções do
+    Conselho Federal de Medicina e às exigências do UKVI.
+  </p>
+
+  <table>
+    <tr><th style="width:30%">Aspecto</th><th>Como é tratado</th></tr>
+    <tr><td>Base legal</td><td>Consentimento do requerente somado à obrigação legal decorrente do processo de visto.</td></tr>
+    <tr><td>Retenção</td><td><strong>20 anos</strong> a partir do último registro (CFM 1.821/2007), prazo superior ao mínimo de 3 anos exigido pelo Reino Unido.</td></tr>
+    <tr><td>Exclusão</td><td>Não há exclusão de casos pela aplicação. Descarte, quando cabível, é feito por rotina administrativa documentada.</td></tr>
+    <tr><td>Arquivos</td><td>Repositório privado; o acesso se dá por link assinado e temporário, nunca por endereço público.</td></tr>
+    <tr><td>Acesso</td><td>Usuário nominal, com papel definido; regras de acesso aplicadas no banco de dados, registro por registro.</td></tr>
+    <tr><td>Auditoria</td><td>Todas as tabelas clínicas têm gatilho de auditoria: autor, data, hora, registro e operação.</td></tr>
+    <tr><td>Integridade</td><td>Certificado imutável após a emissão; arquivos identificados por hash SHA-256.</td></tr>
+    <tr><td>Comunicação</td><td>Tráfego criptografado (HTTPS) entre navegador, servidor e banco de dados.</td></tr>
+    <tr><td>Dados no aparelho</td><td>O aplicativo não guarda informação clínica no celular.</td></tr>
+  </table>
+
+  <h3>Boas práticas esperadas da equipe</h3>
+  <ul>
+    <li>Nunca compartilhar senha; cada profissional usa o próprio acesso.</li>
+    <li>Encerrar a sessão ao sair do computador da recepção.</li>
+    <li>Não enviar documentos de pacientes por aplicativos de mensagem; usar a aba Documentos.</li>
+    <li>Registrar a correção de um dado como retificação, com observação, em vez de sobrescrever sem justificativa.</li>
+    <li>Comunicar imediatamente qualquer acesso indevido ou perda de dispositivo com sessão aberta.</li>
+  </ul>
+</section>
+
+<!-- ============================ 11 ============================ -->
+<section>
+  <h2>11. Perguntas frequentes e solução de problemas</h2>
+
+  <h3>Esqueci minha senha</h3>
+  <p>
+    A recuperação é feita pelo administrador do sistema, que redefine a senha no
+    cadastro de usuários. Por segurança, não há envio automático de senha por
+    e-mail.
+  </p>
+
+  <h3>O sistema diz que o certificado está bloqueado</h3>
+  <p>
+    Leia a mensagem: ela indica exatamente qual condição falhou. O próprio aviso
+    traz o link <em>resolver</em> para a aba correspondente. As causas mais comuns
+    são laudo sem revisão do Panel Physician e escarro indicado sem laudo final
+    negativo.
+  </p>
+
+  <h3>O laudo não aparece como concluído</h3>
+  <p>
+    O laudo precisa de dois registros: a descrição do radiologista e a
+    <strong>revisão do Panel Physician</strong>. Sem a segunda, o caso continua
+    como "Aguardando laudo" e o certificado segue bloqueado.
+  </p>
+
+  <h3>Não consigo anexar uma radiografia</h3>
+  <p>
+    O limite é de <strong>50 MB por arquivo</strong>. Estudos maiores devem ser
+    enviados pelo PACS da clínica ou divididos. Formatos aceitos: PDF, JPG, PNG e
+    DICOM.
+  </p>
+
+  <h3>O sistema pediu escarro e eu discordo</h3>
+  <p>
+    O escarro é indicado quando a CXR é classificada como compatível com TB ativa
+    ou antiga. Se a classificação estiver incorreta, corrija o laudo; se o caso
+    tiver decisão clínica diferente, registre a justificativa na própria aba
+    Escarro ou na Triagem.
+  </p>
+
+  <h3>A internet caiu no meio do atendimento</h3>
+  <p>
+    O que já foi salvo está gravado no servidor. O aplicativo avisa quando está
+    sem conexão e volta ao normal quando a rede retorna. Se um formulário estava
+    aberto e não foi salvo, os dados precisam ser preenchidos novamente.
+  </p>
+
+  <h3>Dois profissionais editaram o mesmo caso</h3>
+  <p>
+    O último salvamento prevalece no campo editado, e ambos ficam registrados na
+    auditoria. Para evitar conflito, combine a divisão de tarefas por aba:
+    recepção cuida de cadastro, identidade e consentimento; enfermagem, da
+    triagem e do escarro; radiologia, da CXR e do laudo; o Panel Physician, da
+    revisão e do desfecho.
+  </p>
+
+  <h3>O caso foi aberto com dados errados</h3>
+  <p>
+    Corrija na aba <strong>Resumo</strong>. O número do caso não muda, porque ele
+    é a referência do processo. Mudanças de nome ou passaporte devem ser feitas
+    apenas com o documento em mãos.
+  </p>
+</section>
+
+<!-- ============================ 12 ============================ -->
+<section>
+  <h2>12. Rotina recomendada e observações finais</h2>
+
+  <h3>Rotina diária sugerida</h3>
+  <ol>
+    <li><strong>Início do dia</strong> — abrir o Painel e tratar a lista <em>Precisam de atenção</em>.</li>
+    <li><strong>Antes de cada atendimento</strong> — conferir identidade e consentimento do caso.</li>
+    <li><strong>Após a CXR</strong> — registrar a data imediatamente, pois ela define todos os prazos.</li>
+    <li><strong>Fim do dia</strong> — verificar se há laudos aguardando revisão e escarros próximos do prazo.</li>
+    <li><strong>Semanalmente</strong> — revisar casos sem movimento há mais de uma semana.</li>
+  </ol>
+
+  <h3>Sobre a versão das Technical Instructions</h3>
+  <p>
+    Os prazos e a validade para contatos familiares seguem a versão de referência
+    registrada nas Configurações (UKTBTI v7). Atualizações do UKHSA podem alterar
+    esses parâmetros; quando isso ocorrer, a regra deve ser revista e a
+    configuração atualizada, sem necessidade de reescrever o sistema.
+  </p>
+
+  <h3>Sobre o ambiente técnico</h3>
+  <ul>
+    <li><strong>Hospedagem:</strong> Vercel, com processamento na região de São Paulo.</li>
+    <li><strong>Banco de dados:</strong> Supabase (PostgreSQL), também em São Paulo.</li>
+    <li><strong>Arquivos:</strong> repositório privado no Supabase Storage, com links assinados.</li>
+    <li><strong>Idioma e fuso:</strong> interface em português; registros em UTC, exibidos no horário de Brasília.</li>
+  </ul>
+
+  <div class="note">
+    <strong>Recomendação.</strong> Defina uma periodicidade (mensal, por exemplo)
+    para conferir a rotina de backup do banco e do repositório de arquivos, e
+    registre quem é o responsável por essa verificação.
+  </div>
+
+  <h3>Encerramento</h3>
+  <p>
+    Este guia descreve a versão 1.0 do sistema. Ajustes de fluxo, novos campos ou
+    mudanças de regra podem ser incorporados conforme a rotina da clínica — o
+    sistema foi construído para acompanhar a prática clínica, e não o contrário.
+  </p>
+
+  <div class="footer">
+    <strong>Antonio Pozzer · Consultório Médico para Imigração</strong> — Porto Alegre, RS<br />
+    Guia do Sistema · Versão 1.0 · Novembro de 2026<br />
+    Criado e desenvolvido por Felipe Schneider
+  </div>
+</section>
+
+</body>
+</html>
