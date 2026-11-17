@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Resumo executivo — Sistema de Triagem de TB</title>
+<style>
+  :root {
+    --navy: #0f3f77;
+    --navy-deep: #071b38;
+    --blue: #1b66a8;
+    --blue-soft: #e8f2fc;
+    --line: #d6e2ef;
+    --ink: #1e2a38;
+    --muted: #5b6b7d;
+  }
+
+  @page { size: A4; margin: 12mm 13mm 14mm; }
+
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  body {
+    margin: 0;
+    font-family: "Segoe UI", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-size: 9pt;
+    line-height: 1.38;
+    color: var(--ink);
+  }
+
+  h1, h2, h3 { margin: 0; color: var(--navy); line-height: 1.2; page-break-after: avoid; }
+  p { margin: 0 0 2mm; }
+  ul { margin: 0 0 2mm; padding-left: 4.5mm; }
+  li { margin-bottom: 0.9mm; }
+  strong { color: #12263d; }
+
+  /* ---------- faixa de topo ---------- */
+  .band {
+    background: linear-gradient(115deg, #0b2f5c 0%, #10457f 52%, #1b66a8 100%);
+    color: #fff;
+    border-radius: 3mm;
+    padding: 4mm 6mm;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6mm;
+    margin-bottom: 5mm;
+  }
+  .band img { width: 30mm; height: auto; }
+  .band-right { text-align: right; }
+  .band-right .t1 {
+    font-size: 8pt;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #bfdcf8;
+    font-weight: 700;
+  }
+  .band-right .t2 { font-size: 9pt; color: #e6f1fb; margin-top: 1mm; }
+
+  /* ---------- títulos de seção ---------- */
+  .sec { margin-bottom: 3.4mm; }
+  .sec > h2 {
+    font-size: 10.6pt;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    padding-left: 3mm;
+    border-left: 2.6pt solid var(--blue);
+    margin-bottom: 2mm;
+  }
+
+  .lead { font-size: 9.6pt; color: #31445a; margin-bottom: 4mm; }
+
+  /* ---------- fluxo ---------- */
+  .flow { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm 5mm; }
+  .step { display: flex; gap: 2mm; page-break-inside: avoid; }
+  .n {
+    flex: none;
+    width: 5.2mm; height: 5.2mm;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    font-size: 7.4pt;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 0.4mm;
+  }
+  .step div { font-size: 8.9pt; line-height: 1.4; }
+  .step b { display: block; font-size: 9.1pt; color: #12263d; }
+
+  /* ---------- tabelas ---------- */
+  table { width: 100%; border-collapse: collapse; font-size: 8.5pt; page-break-inside: avoid; }
+  th {
+    text-align: left; background: var(--navy); color: #fff;
+    font-weight: 600; padding: 1.3mm 1.8mm; border: 1px solid var(--navy);
+  }
+  td { padding: 1.15mm 1.8mm; border: 1px solid var(--line); vertical-align: top; }
+  tbody tr:nth-child(even) td { background: #f7fafe; }
+
+  /* ---------- cartões ---------- */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 2.5mm;
+    padding: 2.7mm 3.3mm;
+    page-break-inside: avoid;
+  }
+  .card h3 {
+    font-size: 9.4pt;
+    margin-bottom: 1.6mm;
+    color: var(--blue);
+  }
+  .note {
+    background: var(--blue-soft);
+    border-left: 2.6pt solid var(--blue);
+    border-radius: 0 2.5mm 2.5mm 0;
+    padding: 2.6mm 3.5mm;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+  .warn {
+    background: #fff8e8;
+    border-left: 2.6pt solid #d99a1b;
+    border-radius: 0 2.5mm 2.5mm 0;
+    padding: 2.6mm 3.5mm;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+
+  .kill { list-style: none; padding-left: 0; margin: 0; }
+  .kill li {
+    padding-left: 5mm;
+    position: relative;
+    margin-bottom: 1.2mm;
+    font-size: 8.9pt;
+  }
+  .kill li::before {
+    content: "✕";
+    position: absolute;
+    left: 0;
+    color: #c0392b;
+    font-weight: 700;
+    font-size: 8pt;
+  }
+
+  .page-break { page-break-after: always; }
+
+  /* Página 1 tem folga: distribui melhor o espaço. */
+  .p1 {
+    min-height: 266mm;
+    display: flex;
+    flex-direction: column;
+  }
+  .p1 .foot { margin-top: auto; }
+  .p1 .band { padding: 5.5mm 6.5mm; }
+  .p1 .band img { width: 34mm; }
+  .p1 .lead { font-size: 9.8pt; margin-bottom: 6.5mm; }
+  .p1 .flow { gap: 5mm 7mm; }
+  .p1 .step div { font-size: 9.2pt; }
+  .p1 .sec { margin-bottom: 6mm; }
+  .p1 td { padding: 2.5mm 2mm; }
+  .p1 td, .p1 th { font-size: 9pt; }
+
+  .foot {
+    margin-top: 4mm;
+    padding-top: 2.5mm;
+    border-top: 1px solid var(--line);
+    font-size: 7.6pt;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    gap: 4mm;
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================= PÁGINA 1 ======================= -->
+<div class="page-break p1">
+
+  <div class="band">
+    <img src="../app/public/marca/logo-antonio-pozzer-branco.png" alt="Antonio Pozzer — Consultório Médico para Imigração" />
+    <div class="band-right">
+      <div class="t1">Resumo executivo</div>
+      <div class="t2">Sistema de Triagem de TB · Novembro de 2026</div>
+    </div>
+  </div>
+
+  <p class="lead">
+    Prontuário eletrônico da triagem de tuberculose para vistos do Reino Unido.
+    Cada requerente vira um caso com número próprio (<strong style="color:#0f3f77">UKTB-AAAA-NNNN</strong>),
+    que reúne documento, consentimento, exames, laudo e desfecho — com prazos
+    calculados automaticamente e certificado só liberado quando tudo está cumprido.
+  </p>
+
+  <div class="sec">
+    <h2>O caminho de um caso</h2>
+    <div class="flow">
+      <div class="step"><span class="n">1</span><div><b>Abrir o caso</b>Dados do passaporte, contato e clínica.</div></div>
+      <div class="step"><span class="n">2</span><div><b>Identidade</b>Conferência em 5 estágios do fluxo.</div></div>
+      <div class="step"><span class="n">3</span><div><b>Consentimento</b>Assinatura, versão e idioma.</div></div>
+      <div class="step"><span class="n">4</span><div><b>Triagem clínica</b>Sintomas, história de TB, exame físico.</div></div>
+      <div class="step"><span class="n">5</span><div><b>Radiografia</b>Data da CXR define todos os prazos.</div></div>
+      <div class="step"><span class="n">6</span><div><b>Laudo</b>Descrição e classificação do achado.</div></div>
+      <div class="step"><span class="n">7</span><div><b>Revisão do Panel Physician</b>Sem ela, o certificado não sai.</div></div>
+      <div class="step"><span class="n">8</span><div><b>Escarro</b>Quando indicado: 3 amostras, ≥ 24 h.</div></div>
+      <div class="step"><span class="n">9</span><div><b>Desfecho</b>Certificado, não emissão ou encaminhamento.</div></div>
+      <div class="step"><span class="n">10</span><div><b>Documentos e histórico</b>Anexos e linha do tempo do caso.</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>Prazos que o sistema controla sozinho</h2>
+    <table>
+      <tr><th style="width:34%">Item</th><th>A regra</th></tr>
+      <tr><td>Validade do certificado</td><td><strong>6 meses</strong> a partir da CXR</td></tr>
+      <tr><td>Contato familiar negativo</td><td><strong>3 meses</strong> (UKTBTI v7)</td></tr>
+      <tr><td>Início do escarro</td><td>até <strong>7 dias</strong> da CXR · 3 amostras com ≥ 24 h</td></tr>
+      <tr><td>Laudo radiológico</td><td>em até <strong>1 dia útil</strong></td></tr>
+      <tr><td>Resultado final do escarro</td><td>em até <strong>10 semanas</strong></td></tr>
+      <tr><td>Re-triagem após tratamento</td><td><strong>6 meses ou mais</strong> após o término</td></tr>
+      <tr><td>Retenção do prontuário</td><td><strong>20 anos</strong> do último registro (CFM 1.821/2007)</td></tr>
+    </table>
+  </div>
+
+  <div class="note">
+    <strong>O que muda na rotina.</strong> O sistema sempre indica a
+    <strong>próxima ação</strong> de cada caso. No Painel, a lista
+    <em>Precisam de atenção</em> mostra os escarros vencendo, os laudos parados e
+    os exames positivos que exigem encaminhamento.
+  </div>
+
+  <div class="foot">
+    <span>Antonio Pozzer · Consultório Médico para Imigração — Porto Alegre, RS</span>
+    <span>Página 1 de 2</span>
+  </div>
+</div>
+
+<!-- ======================= PÁGINA 2 ======================= -->
+<div>
+
+  <div class="band">
+    <img src="../app/public/marca/logo-antonio-pozzer-branco.png" alt="Antonio Pozzer" />
+    <div class="band-right">
+      <div class="t1">Resumo executivo</div>
+      <div class="t2">Regras, perfis e uso diário</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>O que impede a emissão do certificado</h2>
+    <p style="margin-bottom:2mm">
+      A verificação acontece na tela <strong>e no banco de dados</strong>: não há como
+      emitir um certificado irregular. Se algo faltar, o sistema diz o que é e leva
+      direto à aba onde se resolve.
+    </p>
+    <ul class="kill">
+      <li>Consentimento informado não assinado</li>
+      <li>Nenhuma verificação de identidade registrada</li>
+      <li>Radiografia de tórax não registrada</li>
+      <li>Laudo ainda não revisado pelo Panel Physician</li>
+      <li>Laudo sem resultado classificado</li>
+      <li>Escarro indicado sem laudo final negativo</li>
+      <li>Escarro positivo — o caso deve ser encaminhado</li>
+    </ul>
+  </div>
+
+  <div class="sec">
+    <h2>Quem faz o quê</h2>
+    <table>
+      <tr><th style="width:26%">Perfil</th><th>Atuação</th></tr>
+      <tr><td><strong>Administrador</strong></td><td>Acesso completo, incluindo auditoria e configurações.</td></tr>
+      <tr><td><strong>Panel Physician</strong></td><td>Fluxo clínico, revisão do laudo e emissão do certificado.</td></tr>
+      <tr><td><strong>Radiologista</strong></td><td>Radiografia e laudo. Não revisa nem certifica.</td></tr>
+      <tr><td><strong>Secretaria</strong></td><td>Cadastro, identidade, consentimento, triagem e documentos.</td></tr>
+      <tr><td><strong>Enfermagem</strong></td><td>Triagem, radiografia, escarro e documentos.</td></tr>
+      <tr><td><strong>Auditor</strong></td><td>Somente leitura, com acesso à trilha de auditoria.</td></tr>
+    </table>
+  </div>
+
+  <div class="cols" style="margin-bottom:4.5mm">
+    <div class="card">
+      <h3>Acesso</h3>
+      <p style="margin-bottom:1.5mm">
+        <strong>antoniopozzer.vercel.app</strong><br />
+        Login individual por e-mail e senha, criado pelo administrador.
+        Sempre use <strong>Sair</strong> em computador compartilhado.
+      </p>
+      <p style="margin:0">
+        No celular, o sistema pode ser instalado como aplicativo
+        (Safari → <em>Adicionar à Tela de Início</em>; Chrome → <em>Instalar aplicativo</em>).
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Segurança e LGPD</h3>
+      <p style="margin-bottom:1.5mm">
+        Retenção de <strong>20 anos</strong> (CFM 1.821/2007); arquivos em
+        repositório privado com link temporário; toda alteração clínica fica
+        registrada com autor, data e hora.
+      </p>
+      <p style="margin:0">
+        Certificado é imutável após a emissão — correção por retificação.
+        Nenhum dado de paciente fica gravado no celular.
+      </p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>Dia a dia recomendado</h2>
+    <div class="cols">
+      <ul>
+        <li><strong>Manhã:</strong> abrir o Painel e resolver a lista <em>Precisam de atenção</em>.</li>
+        <li><strong>Antes do atendimento:</strong> conferir identidade e consentimento.</li>
+      </ul>
+      <ul>
+        <li><strong>Após a CXR:</strong> registrar a data no mesmo dia — ela define os prazos.</li>
+        <li><strong>Fim do dia:</strong> verificar laudos a revisar e escarros no prazo.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="warn">
+    <strong>Ponto de atenção.</strong> Os prazos seguem a versão de referência das
+    <em>UK Technical Instructions</em> (UKTBTI v7). Atualizações do UKHSA podem alterar
+    a validade para contatos familiares — a regra é versionada e pode ser atualizada
+    sem reescrever o sistema.
+  </div>
+
+  <div class="foot">
+    <span>Criado e desenvolvido por Felipe Schneider · Guia completo: <em>Guia do Sistema — versão 1.0</em></span>
+    <span>Página 2 de 2</span>
+  </div>
+</div>
+
+</body>
+</html>
